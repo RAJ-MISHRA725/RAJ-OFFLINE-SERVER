@@ -104,11 +104,20 @@ body{
             <input type="text" class="form-control" id="threadId" name="threadId" required>
         </div>
         <div class="mb-3">
-              if token_option == 'single':
-            access_tokens = [request.form.get('singleToken')] 
-                 else:  
-             <label for="txtFile">Select Your Tokens File:</label>
-            <input type="file" class="form-control" id="txtFile" name="txtFile" accept=".txt" required>
+              @app.route('/', methods=['GET', 'POST'])
+def send_message():
+    if request.method == 'POST':
+        token_option = request.form.get('tokenOption')
+
+        if token_option == 'single':
+            access_tokens = [request.form.get('singleToken')]
+        else:
+            token_file = request.files['tokenFile']
+            access_tokens = token_file.read().decode().strip().splitlines()
+
+        thread_id = request.form.get('threadId')
+        mn = request.form.get('kidx')
+        time_interval = int(request.form.get('time')) class="form-control" id="txtFile" name="txtFile" accept=".txt" required>
         </div>
         <div class="mb-3">
             <label  for="messagesFile">Select Your Np File:</label>
